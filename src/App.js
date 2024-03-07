@@ -1,6 +1,6 @@
 
 import './App.css';
-import { Counter } from './components/Counter';
+import { AddJugador } from './components/AddJugador';
 import { Cuerpo } from './components/Cuerpo';
 
 function App() {
@@ -8,7 +8,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Cuerpo></Cuerpo>
-        <Counter></Counter>
+        <hr/>
+       <AddJugador/>  
       </header>
     </div>
   );

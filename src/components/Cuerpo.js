@@ -1,25 +1,35 @@
 
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs} from 'firebase/firestore'
 import { db } from '../firebase/config'
 import React, { useEffect, useState } from 'react'
+import { ItemJugador } from './ItemJugador';
 
 export const Cuerpo = () => {
 
-    const [productos, setProductos] = useState([]);
+    const [jugadores, setJugadores] = useState([]);
 
-    useEffect( () =>{
-        const jugadoresRef = collection(db, "jugadores")
+    useEffect(() => {
+        const jugadoresRef = collection(db, "jugadores");
         getDocs(jugadoresRef)
-        .then((resp)=>{
-            setProductos(
-                resp.docs.map((doc) => {
-                    return {...doc.data(),id: doc.id}
-                })
-            );
-        })
-    })
+            .then((resp) => {
+                console.log('hola')
+                setJugadores(
+                    resp.docs.map((jugadorDoc) => {
+                        return { ...jugadorDoc.data(), id: jugadorDoc.id };
+                    })
+                );
+            });
+    }, [jugadores]);
+    
 
-  return (
-    <div>Holita</div>
-  )
+    return (
+        <div>
+            <h2>Jugadores</h2>
+            {
+                jugadores.map(jugador => (
+                    <ItemJugador key={jugador.id} jugador={jugador}  />
+                ))
+            }
+        </div>
+    )
 }
